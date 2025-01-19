@@ -18,6 +18,8 @@ public class Player : Entity
 {
 
     public Guntype gunType = Guntype.Pistol;
+
+   
     
     #region Prefabs
     [Header("Prefabs")]
@@ -46,8 +48,8 @@ public class Player : Entity
     {
         base.Awake();
         stateMachine = new PlayerStateMachine();
-        idleState = new PlayerIdleState(this, stateMachine, "idle");
-        moveState = new PlayerMoveState(this, stateMachine, "move");
+        idleState = new PlayerIdleState(this, stateMachine, "Idle");
+        moveState = new PlayerMoveState(this, stateMachine, "Run");
     }
 
     protected override void Start()
@@ -58,6 +60,8 @@ public class Player : Entity
     protected override void Update() 
     {
         stateMachine.currentState.Update();
+        
+        stateMachine.currentState.FixedUpdate();
 
         RotateArm();
 
@@ -93,6 +97,16 @@ public class Player : Entity
         {
             //TODO MARY or JEN Create SpreadFire
             // Instantiate 3 bullet prebafs with three differecnt rotations
+           
+           Quaternion bulletRotation1 = arm.transform.rotation * Quaternion.Euler(0, 0, -83); 
+           Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, bulletRotation1);
+           Quaternion bulletRotation2 = arm.transform.rotation * Quaternion.Euler(0, 0, -85); 
+           Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, bulletRotation2);
+           Quaternion bulletRotation3 = arm.transform.rotation * Quaternion.Euler(0, 0, -87); 
+           Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, bulletRotation3);
+            
+           
+
         }
 
     }
