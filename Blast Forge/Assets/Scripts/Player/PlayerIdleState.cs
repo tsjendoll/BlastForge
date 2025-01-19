@@ -23,8 +23,16 @@ public class PlayerIdleState : PlayerState
     {
         base.Update();
 
+        if (xInput != 0 || yInput != 0)
+            stateMachine.ChangeState(player.moveState);
 
+        Debug.Log("I'm in idle state");
     }
-    
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
 }
 

@@ -21,6 +21,18 @@ public class PlayerMoveState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (xInput == 0 && yInput == 0)
+            stateMachine.ChangeState(player.idleState);
+        
+        
     }
-    
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        //TODO Mary move player around using xInput and yInput
+    }
+
 }
